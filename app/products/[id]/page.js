@@ -1,8 +1,39 @@
-export default async function ProductDetails({ params }) {
+import Link from "next/link";
+import { notFound } from "next/navigation";
+
+export default async function ProductDetailsPage({ params }) {
   const { id } = await params;
+
+  const res = await fetch(`https://dummyjson.com/products/${id}`, {
+    next: { revalidate: 60 },
+  });
+
+  if (!res.ok) {
+    notFound();
+  }
+
+  const product = await res.json();
+
   return (
     <div style={{ border: "1px solid black", padding: "20px" }}>
-      <h3>Product {id} details page — content coming soon!</h3>
+      <h2>{product.title}</h2>
+
+      <p>
+        <strong>Brand:</strong> {product.brand}
+      </p>
+      <p>
+        <strong>Category:</strong> {product.category}
+      </p>
+      <p>
+        <strong>Description:</strong> {product.description}
+      </p>
+      <p>
+        <strong>Price:</strong> ${product.price}
+      </p>
+
+      <br />
+
+      <Link href="/products">← Back to Products</Link>
     </div>
   );
 }

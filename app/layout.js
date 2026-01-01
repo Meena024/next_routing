@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -18,9 +20,14 @@ export default function RootLayout({ children }) {
           }}
         >
           <h1>Products Store</h1>
+
+          <nav style={{ display: "flex", gap: "1rem" }}>
+            <Link href="/">Home</Link>
+            <Link href="/products">Products</Link>
+          </nav>
         </header>
 
-        {/* Scrollable Content */}
+        {/* Content */}
         <main
           style={{
             flex: 1,
