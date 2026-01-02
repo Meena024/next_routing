@@ -19,9 +19,25 @@ export default function RootLayout({ children }) {
             flexShrink: 0,
           }}
         >
-          <h1>Products Store</h1>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+          >
+            <img
+              src="/products/Logo.png"
+              alt="logo"
+              style={{
+                width: "50px",
+                height: "50px",
+              }}
+            />
+            <h1 style={{ margin: "0px auto" }}>Products Store</h1>
+          </div>
 
-          <nav style={{ display: "flex", gap: "1rem" }}>
+          <nav style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
             <Link href="/">Home</Link>
             <Link href="/products">Products</Link>
           </nav>
