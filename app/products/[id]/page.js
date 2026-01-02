@@ -18,6 +18,18 @@ export default async function ProductDetailsPage({ params }) {
     <div style={{ border: "1px solid black", padding: "20px" }}>
       <h2>{product.title}</h2>
 
+      {/* ✅ Static image from public */}
+      <img
+        src="/products/placeholder.jpg"
+        alt={product.title}
+        style={{
+          width: "100px",
+          height: "100px",
+          marginBottom: "1rem",
+          display: "block",
+        }}
+      />
+
       <p>
         <strong>Brand:</strong> {product.brand}
       </p>
