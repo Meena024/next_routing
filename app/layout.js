@@ -1,6 +1,10 @@
 import Link from "next/link";
+import { cookies } from "next/headers";
 
 export default function RootLayout({ children }) {
+  const cookieStore = cookies();
+  const token = cookieStore?.token;
+
   return (
     <html lang="en">
       <body
@@ -29,28 +33,29 @@ export default function RootLayout({ children }) {
             <img
               src="/products/Logo.png"
               alt="logo"
-              style={{
-                width: "50px",
-                height: "50px",
-              }}
+              style={{ width: "50px", height: "50px" }}
             />
-            <h1 style={{ margin: "0px auto" }}>Products Store</h1>
+            <h1 style={{ margin: "0 auto" }}>Products Store</h1>
           </div>
 
           <nav style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
             <Link href="/">Home</Link>
             <Link href="/products">Products</Link>
+
+            {token ? (
+              <>
+                <Link href="/dashboard">Dashboard</Link>
+                <form action="/api/logout" method="POST">
+                  <button type="submit">Logout</button>
+                </form>
+              </>
+            ) : (
+              <Link href="/login">Login</Link>
+            )}
           </nav>
         </header>
 
-        {/* Content */}
-        <main
-          style={{
-            flex: 1,
-            overflowY: "auto",
-            padding: "1rem",
-          }}
-        >
+        <main style={{ flex: 1, overflowY: "auto", padding: "1rem" }}>
           {children}
         </main>
 
